@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =8
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/Users/nifan/.vim/plugged/vim-markdown'
 let g:netrw_dirhist_8='/Users/nifan/.vim'
 let g:netrw_dirhist_7='/Users/nifan/.vim/colors'
 let g:netrw_dirhist_6='/Users/nifan/.vim'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_3='/Users/nifan/Documents'
 let g:netrw_dirhist_2='/Users/nifan/.vim/plugged/vim-snippets/UltiSnips'
 let g:netrw_dirhist_1='/Users/nifan/.vim/plugged/vim-snippets'
 let g:netrw_dirhist_0='/Users/nifan/.vim/plugged'
-let g:netrw_dirhist_9='/Users/nifan/.vim'

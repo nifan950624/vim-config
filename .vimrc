@@ -1,7 +1,8 @@
 call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 Plug 'junegunn/vim-easy-align'
-" Plugin options
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 Plug 'nsf/gocode', { 'rtp': 'vim' }
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.vim'
