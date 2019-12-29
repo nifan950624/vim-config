@@ -145,13 +145,12 @@ noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
 
 nmap nh :nohl<cr>
-nmap <leader>j ^
-nmap <leader>k $
 map gtf :fuftag<cr>
 map! gtf <esc>:w<cr>:fuftag<cr>
-
-nnoremap <c-]> g<c-]>
-vnoremap <c-]> g<c-]>
+nnoremap <Leader>j ^
+vnoremap <Leader>j ^
+nnoremap <leader>k $
+vnoremap <leader>k $
 
 "映射复制、粘贴、剪贴ctrl+c ctrl+v ctrl+x
 
