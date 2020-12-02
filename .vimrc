@@ -34,6 +34,11 @@ map! <F2> <C-O><S-K><CR>
 map <F6> :! tab vim<CR><CR>
 map! <F6> <Esc>:! tab vim<CR><CR>
 
+vnoremap ,j ^
+vnoremap ,k $ 
+nnoremap ,j ^ 
+nnoremap ,k $ 
+
 "快捷键设置
 map <F12> :TagbarToggle<CR>
 map! <F12> <Esc>:TagbarToggle<CR>
@@ -59,17 +64,6 @@ vnoremap <Leader>j ^
 nnoremap <leader>k $
 vnoremap <leader>k $
 
-"映射复制、粘贴、剪贴ctrl+c ctrl+v ctrl+x
-
-noremap <leader>v <c-v> 
-map <c-v> "+pa<esc>
-map! <c-v> <esc>"+pa
-
-map <c-c> "+y
-map <c-x> "+x
-
-" 映射全选 ctrl+a
-map <c-a> ggVG
 
 "双击时高亮
 map <2-leftmouse> \m
