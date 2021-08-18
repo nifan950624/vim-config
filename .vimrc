@@ -1,17 +1,31 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/vim-easy-align'
-Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Valloric/YouCompleteMe'
+" Plug 'vim-syntastic/syntastic'
+Plug 'Chiel92/vim-autoformat'
 Plug 'scrooloose/nerdtree'
-
-
+Plug 'tpope/vim-surround'
+Plug 'pangloss/vim-javascript'
+Plug 'mattn/emmet-vim'
 "快速跳转到字符
 Plug 'easymotion/vim-easymotion'
 Plug 'bling/vim-airline'
 call plug#end()
+
+
+" YouCompleteMe
+if !exists("g:ycm_semantic_triggers")
+ let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
+
+" autoformat
+noremap <leader>f :Autoformat<CR>
+
 let mapleader=" "
 
 colorscheme  molokai  
@@ -30,41 +44,24 @@ let g:solarized_termcolors=16
 let g:molokai_original = 1
 let g:rehash256 = 1
 
-vnoremap ,j ^
-vnoremap ,k $ 
-nnoremap ,j ^ 
-nnoremap ,k $ 
-
-"快捷键设置
-map <F12> :TagbarToggle<CR>
-map! <F12> <Esc>:TagbarToggle<CR>
-
-map <C-P> :tabnew<CR>:FZF<CR>
-map!<C-P> <ESc>:w<CR> :tabnew<CR>:FZF<CR>
-
-"快速对齐
-" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-
 noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
+nmap <leader>w :w
+nmap <leader>q :q
+map ,j ^
+map ,k $
+nmap <leader>n :nohl<cr>
 
-nmap nh :nohl<cr>
-
-map <c-f> :NERDTreeToggle<CR>
-map! <c-f> <esc>:NERDTreeToggle<CR>
-
-"空格选中单词
-:nnoremap <space> viw
-
-nmap <leader>o o<esc>
-nmap <leader>O O<esc>
+map <c-e> :NERDTreeToggle<CR>
+map! <c-e> <esc>:NERDTreeToggle<CR>
+map <c-t> :terminal<CR>
+map! <c-t> :terminal<CR>
 
 "用数字切换tab页面
-noremap  R gt
-noremap  E gT
+nmap R gt
+nmap E gT
 
 "markdown预览
 map <silent> <F8> <Plug>MarkdownPreview
