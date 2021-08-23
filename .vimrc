@@ -1,6 +1,8 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'plasticboy/vim-markdown'
+Plug 'Raimondi/delimitMate'
+Plug 'ferrine/md-img-paste.vim'
 Plug 'iamcco/markdown-preview.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -13,9 +15,31 @@ Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
 "快速跳转到字符
 Plug 'easymotion/vim-easymotion'
-Plug 'bling/vim-airline'
 call plug#end()
 
+let mapleader=" "
+
+" md粘贴图片
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+let g:mdip_imgdir = 'img'
+
+inoremap <expr> <CR> Expander()
+
+function! Expander()
+  let line = getline(".")
+  let col = col(".") - 1
+
+  if line[0:2] ==# "```" && line[col : col+2] ==# "```"
+    return "\<CR>\<Esc>O"
+  endif
+
+  return "\<CR>"
+endfunction
+
+au FileType python let b:delimitMate_autoclose = 0
+au FileType python let b:delimitMate_nesting_quotes = ['"']
+
+au FileType md let b:delimitMate_autoclose = 0
 
 " YouCompleteMe
 if !exists("g:ycm_semantic_triggers")
@@ -23,16 +47,25 @@ if !exists("g:ycm_semantic_triggers")
 endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
 
-" autoformat
-noremap <leader>f :Autoformat<CR>
-
-let mapleader=" "
+set completeopt=longest,menu
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	"回车即选中当前项
+"上下左右键的行为 会显示其他信息
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+" 跳转到定义处
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>	"force recomile with syntastic
+" nnoremap <leader>lo :lopen<CR>	"open locationlist
+" nnoremap <leader>lc :lclose<CR>	"close locationlist
+inoremap <leader><leader> <C-x><C-o>
 
 colorscheme  molokai  
 set t_Co=256
 set background=dark
 set wildignore=vendor/**
-set relativenumber
 
 "设置NERDTreetagbar的宽度
 let g:NERDTreeWinSize = 20
@@ -48,8 +81,13 @@ noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
-nmap <leader>w :w
-nmap <leader>q :q
+
+" autoformat
+noremap <leader>f :Autoformat<CR>
+
+nmap <leader>w :w<CR>
+nmap <leader>q :q<CR>
+nmap <leader>wq :wq<CR>
 map ,j ^
 map ,k $
 nmap <leader>n :nohl<cr>
@@ -69,12 +107,12 @@ map! <silent> <F8> <Plug>MarkdownPreview
 map <silent> <F9> <Plug>StopMarkdownPreview
 map! <silent> <F9> <Plug>StopMarkdownPreview
 
+autocmd BufNewFile,BufRead *.md set nofoldenable
+
 "语法高亮
 syntax enable
 syntax on
-set autoindent
 set number
-set smartindent
 set tabstop=2
 set shiftwidth=2
 set expandtab
